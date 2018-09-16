@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Appointment Manager</title>
+		<link href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../static/viewAppointment.css" rel="stylesheet">
+	</head>
+ 
+	<body>
+
+		<div class="container">
+			<div class="header">
+				<h3 class="text">View Appointments</h3>
+					<nav>
+						<ul class="nav">
+						<li role="presentation"><a href="/">Home&nbsp;</a>
+						</li>
+						<li role="presentation"><a href="#">Show Appointments&nbsp;</a>
+						</li>
+						<li role="presentation"><a href="createAppForm"> Make Appointment </a>
+						</li>
+					</ul>
+			</div>
+		</div>
+ 
+ 
+		<div class="jumbotron">
+			<h1>Stored Appointments</h1>
+			
+			<div id="apps">
+			<button id="show" class="btn btn-lg btn-primary btn-block" type="button">Show Appointments</button>
+			</div>
+			
+			<button id="delete" class="btn btn-lg btn-primary btn-block" type="button">Clear Appointments</button>
+		
+		</div>
+
+		<script src="../static/js/jquery-3.3.1.js"></script>
+		<script>
+			$(function() {
+				$('#show').click(function() {
+					console.log("Viewing");
+					$.ajax({
+						url: 'viewApps',
+						type: 'POST',
+						success: function(response) {
+							console.log(response);
+							var xhttp = new XMLHttpRequest();
+							xhttp.onreadystatechange = function() {
+								if (this.readyState == 4) {
+									document.getElementById("apps").innerHTML = this.responseText;
+								}
+							};
+							xhttp.open("POST", "viewApps");
+							xhttp.send();
+						},
+						error: function(error) {
+							console.log(error);
+						}
+					});
+				});
+			});
+		</script>
+		<script>
+			$(function() {
+				$('#delete').click(function() {
+					console.log("Deleting");
+					$.ajax({
+						url: 'removeApps',
+						type: 'POST',
+						success: function(response) {
+							console.log('Records successfully deleted.')
+							console.log(response);
+						},
+						error: function(error) {
+							console.log('Deletion failed.')
+							console.log(error);
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

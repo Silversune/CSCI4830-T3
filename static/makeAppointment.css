@@ -1,0 +1,21 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.form-createapp {
+  max-width: 330px;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.form-createapp .form-control {
+  position: relative;
+  height: auto;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.form-createapp input[type=time] {
+  margin-bottom: 25px;
+}

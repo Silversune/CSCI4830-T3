@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Appointment Manager</title>
+		<link href="https://getbootstrap.com/docs/3.3/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../static/makeAppointment.css" rel="stylesheet">
+	</head>
+ 
+	<body>
+
+		<div class="container">
+			<div class="header">
+				<h3 class="text">Enter Appointment</h3>
+					<nav>
+						<ul class="nav">
+						<li role="presentation"><a href="/">Home&nbsp;</a>
+						</li>
+						<li role="presentation"><a href="seeApps">Show Appointments&nbsp;</a>
+						</li>
+						<li role="presentation"><a href="#"> Make Appointment </a>
+						</li>
+					</ul>
+			</div>
+		</div>
+ 
+ 
+		<div class="jumbotron">
+			<h1>Appointment Details</h1>
+			<form class="form-createapp">
+
+			<label for="nameIn">Title</label>
+			<input type="text" name="nameIn" maxlength="50" class="form-control" placeholder="Title" required autofocus>
+			
+			<label for="subnameIn">Subtitle</label>
+			<input type="text" name="subnameIn" maxlength="100" class="form-control" placeholder="Subtitle" required>
+			
+			<label for="attendeesIn">Attendees</label>
+			<input type="text" name="attendeesIn" maxlength="255" class="form-control" placeholder="Attendees" required>
+			
+			<label for="dateIn">Date</label>
+			<input type="date" name="dateIn" class="form-control" required>
+			
+			<label for="timeIn">Time</label>
+			<input type="time" name="timeIn" class="form-control" value="12:00:00" required>
+			
+			<button id="submit" class="btn btn-lg btn-primary btn-block" type="button">Submit</button>
+			</form>
+			
+		
+		</div>
+
+		<script src="../static/js/jquery-3.3.1.js"></script>
+		<script>
+			$(function() {
+				$('#submit').click(function() {
+					console.log("Hello");
+					$.ajax({
+						url: '/makeApp',
+						data: $('form').serialize(),
+						type: 'POST',
+						success: function(response) {
+							console.log(response);
+						},
+						error: function(error) {
+							console.log(error);
+						}
+					});
+				});
+			});
+		</script> 
+        
+	</body>
+</html>
